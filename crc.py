@@ -29,12 +29,30 @@ def mod2div(dividend, divisor):
 def encodeData(data, key):
     l_key = len(key)
     appended_data = data + '0'*(l_key-1)
+    print("Appended data is " + appended_data)
     remainder = mod2div(appended_data, key)
+    print("Remainder is: " + remainder)
     codeword = data + remainder
     return codeword
 
-data = "1101011011"
-key = "1001"
+def decodeData(data, key):
+    l_key = len(key)
+    appended_data = data + '0'*(l_key-1)
+    remainder = mod2div(appended_data, key)
+    return remainder
+
+data = "1101"
+key = "101"
 print("Original Data: ", data)
 encoded_data = encodeData(data, key)
 print("Encoded Data: ", encoded_data)
+
+received_data=str(int(input("Enter recieved data")))
+print("Received Data: ", received_data)
+remainder = decodeData(received_data, key)
+print("Remainder after decoding: ", remainder)
+
+if '1' in remainder:
+    print("Error detected in received data")
+else:
+    print("No error detected in received data")
